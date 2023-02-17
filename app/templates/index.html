@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block body %}
+<section class="section" id="section-login">
+	<article class="login-form">
+		<form class="form" id="login-form">
+			<div class="image">
+				<img
+					src="{{url_for('static', filename='./images/user_white.png')}}"
+					alt="" />
+			</div>
+			<div class="field">
+				<label class="label">Nombre</label>
+				<div class="control">
+					<input
+						type="text"
+						name="usr-name"
+						class="input"
+						id="input-name"
+						placeholder="Nombre" />
+				</div>
+			</div>
+			<div class="field">
+				<label class="label">Contraseña</label>
+				<div class="control">
+					<input
+						class="input"
+						id="input-password"
+						name="usr-passwrd"
+						type="password"
+						placeholder="Contraseña" />
+				</div>
+			</div>
+			<div class="field is-grouped is-grouped-right">
+				<div class="control">
+					<button class="button is-link is-medium" id="submit-btn">
+						Enviar
+					</button>
+				</div>
+			</div>
+		</form>
+	</article>
+</section>
+{% endblock %} {%block scripts %}
+<script src="{{ url_for('static', filename='js/do_login.js') }}"></script>
+{% endblock %}
