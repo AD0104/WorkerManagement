@@ -1,4 +1,6 @@
+from datetime import timedelta
 class Config:
+    PERMANENT_SESSION_LIFETIME=timedelta(minutes=5)
     SECRET_KEY="664qHCBhBhG1bKK6"
     SALT = "46c^"
     MYSQL_USER="admin"

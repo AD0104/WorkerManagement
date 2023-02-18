@@ -1,4 +1,4 @@
-from flask import jsonify, redirect, render_template, request, make_response, current_app, url_for 
+from flask import jsonify, redirect, request, make_response, current_app, url_for, session
 from flask_login import login_required, login_user, logout_user
 from passlib.hash import sha512_crypt as crypto
 
@@ -25,6 +25,7 @@ def do_login():
         user_data = UserData(db_response["usr-name"], db_response["usr-passwrd"])
         user_model = UserModel(user_data)
         login_user(user_model)
+        session.permanent = True
 
         return make_json_response(url_for('main_menu'),"200") 
     return redirect(url_for('index'))
