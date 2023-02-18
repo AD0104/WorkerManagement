@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block head_tags %}
+<link rel="stylesheet" href="{{ url_for('static',filename='./css/employee.css') }}">
+{% endblock %}
+{% block body %}
+{{ super() }}
+<section class="section full-page">
+    <section class="container">
+        <section class="container--left">
+            <img src="{{ url_for('static', filename='./images/user_white.png')}}" alt="">
+        </section>
+        <section class="container--right">
+            <section class="container--right--top-left">
+                <h1>Informacion personal</h1>
+                <section class="section">
+                    <p>Nombre: <span>{{ worker_info["name"] }} {{worker_info["last_name"]}}</span></p>
+                    <p>Edad y Fech. Nac: <span>{{ worker_info["age"] }}</span> años, nacido en <span>{{ worker_info["birth_date"] }}</span></p>
+                    <p>Sexo: <span>{{ worker_info["sex"] }}</span></p>
+                    <p>CURP: <span>{{worker_info["curp"]}}</span></p>
+                </section>
+            </section>
+            <section class="container--right--top-right">
+                <h1>Datos en la empresa</h1>
+                <section class="section">
+                    <p>Fecha de entrada: <span>{{worker_info["entry_date"]}}</span></p>
+                    <p>Puesto: <span>{{worker_info["position"]}}</span></p>
+                    <p>Ubicacion: <span>{{worker_info["branch"]}}</span></p>
+                    <p>Dias Vacacionales Asignados: 
+                        <span>
+                        {% if worker_info["vacation_assigned_days"] != "None" %} 
+                            {{worker_info["vacation_assigned_days"]}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </p>
+                    <p>Dias Vacacionales Tomados: 
+                        <span>
+                        {% if worker_info["vacation_taken_days"] != "None" %} 
+                            {{worker_info["vacation_taken_days"]}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </p>
+                    <p>Dias Vacacionales Restantes: 
+                        <span>
+                        {% if worker_info["vacation_remaining_days"] != "None" %} 
+                            {{worker_info["vacation_remaining_days"]}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </p>
+                </section>
+            </section>
+            <section class="container--right--bottom-left">
+                <h1>Salario</h1>
+                <section class="section">
+                    <p>Por Minuto: <span>{{ worker_info["minutely_salary"] }}</span></p>
+                    <p>Por Hora: <span>{{ worker_info["hourly_salary"] }}</span></p>
+                    <p>Por Dia: <span>{{ worker_info["daily_salary"] }}</span></p>
+                    <p>Por Quincena: <span>{{ worker_info["biweekly_salary"] }}</span></p>
+                    <p>Por Mes: <span>{{ worker_info["monthly_salary"] }}</span></p>
+                </section>
+            </section>
+            <section class="container--right--bottom-right">
+                <h1>Ajustes</h1>
+                <section class="section"></section>
+            </section>
+        </section>
+    </section>
+</section>
+{% endblock %}

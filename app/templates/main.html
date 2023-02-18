@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block body %} {% include 'navbar.html' %}
+{% extends 'base.html' %} 
+{% block body %}
+{{ super() }}
 <section class="section">
 	{% set row_count = 1%} 
 	{% for _, worker_dict in worker_info.items()%}
@@ -41,7 +43,7 @@
 			</div>
 			<footer class="card-footer field is-grouped is-grouped-centered">
 				<div class="control">
-					<a href="#" class="button">Ver Mas</a>
+					<a href="/menu/employee/{{worker_dict['id']}}" class="button">Ver Mas</a>
 				</div>	
 			</footer>
 		</div>
