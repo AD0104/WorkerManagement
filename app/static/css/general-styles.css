@@ -41,6 +41,32 @@ p {
     align-items: center;
 }
 
+/* Navbar modifications */
+.navbar,
+.navbar-menu {
+    background-color: var(--background);
+}
+
+.navbar-dropdown {
+    background-color: var(--background);
+    border-top: 2px solid var(--background-yellow);
+}
+
+.navbar-item,
+.navbar-link {
+    color: white;
+}
+
+a.navbar-item:hover,
+a.navbar-link:hover {
+    color: var(--background-yellow) !important;
+    background-color: inherit;
+}
+
+.navbar-burger {
+    color: white !important;
+}
+
 /* Login Form Styles */
 .login-form {
     width: 60%;
