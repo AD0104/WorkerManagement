@@ -1,2 +1,53 @@
-{% extends 'base.html' %} {% block body %} {% include 'navbar.html' %} {%
-endblock %}
+{% extends 'base.html' %} {% block body %} {% include 'navbar.html' %}
+<section class="section">
+	{% set row_count = 1%} 
+	{% for _, worker_dict in worker_info.items()%}
+		{% if loop.index0 % 3 == 0 %}
+		<section class="row">
+		{% endif %}
+		<div class="card">
+			<div class="card-image">
+					<img src="{{url_for('static', filename='./images/user.png') }}" alt="Foto de usuario de {{worker_dict['name']}}" loading="lazy">
+			</div>
+			<div class="card-content">
+				<div class="content">
+					<div class="content-row">
+						<div class="content-row--item">
+							<label class="label">Nombre</label>
+							<p>{{worker_dict["name"]}}</p>
+						</div>
+						<div class="content-row--item">
+							<label class="label">Puesto</label>
+							<p>{{worker_dict["position"]}}</p>
+						</div>
+					</div>
+					<div class="content-row">
+						<div class="content-row--item">
+							<label class="label">Salario Diario</label>
+							<p>{{worker_dict["daily_salary"]}}</p>
+						</div>						
+						<div class="content-row--item">
+							<label class="label">Salario Quincenal</label>
+							<p>{{worker_dict["biweekly_salary"]}}</p>
+						</div>
+					</div>
+					<div class="content-row">
+						<div class="content-row--item">
+							<label class="label">Salario Mensual</label>
+							<p>{{worker_dict["monthly_salary"]}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="card-footer field is-grouped is-grouped-centered">
+				<div class="control">
+					<a href="#" class="button">Ver Mas</a>
+				</div>	
+			</footer>
+		</div>
+		{% if loop.index0 % 3 == 2 or loop.last %}
+		</section>
+		{% endif %}
+	{%endfor%}
+</section>
+{%endblock %}

@@ -7,6 +7,9 @@
 :root {
     --background: #14213D;
     --background-alternate: #00356680;
+    --background-alternate-light: #003566;
+    --background-blue: #1b263b;
+    --background-yellow: #fca311;
 }
 
 body {
@@ -14,6 +17,11 @@ body {
     min-height: 100vh;
     height: auto;
     background-color: var(--background);
+}
+
+a,
+p {
+    color: inherit;
 }
 
 .label {
@@ -46,4 +54,61 @@ body {
 
 .form {
     width: 75%;
+}
+
+/* Card (3 each row) */
+.row {
+    margin-block: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+.row p,
+.row a {
+    margin-left: 10px;
+    color: white;
+}
+
+.card {
+    width: 30%;
+    background-color: var(--background-alternate-light);
+}
+
+.card-image {
+    display: flex;
+    justify-content: center;
+}
+
+.card-image img {
+    width: 50%;
+    margin-top: 10px;
+    object-fit: cover;
+}
+
+.card-footer {
+    padding-block: 1em;
+}
+
+.content-row {
+    width: 100%;
+    margin-block: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.content-row--item {
+    width: 50%;
+}
+
+.button {
+    background-color: var(--background-blue);
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+    color: var(--background-yellow);
 }
