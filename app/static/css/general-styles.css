@@ -44,11 +44,11 @@ p {
 /* Navbar modifications */
 .navbar,
 .navbar-menu {
-    background-color: var(--background);
+    background-color: var(--background-alternate);
 }
 
 .navbar-dropdown {
-    background-color: var(--background);
+    background-color: var(--background-alternate);
     border-top: 2px solid var(--background-yellow);
 }
 

@@ -1,0 +1,215 @@
+{% extends 'base.html' %} 
+{% block head_tags %}
+<link rel="stylesheet" href="{{ url_for('static',filename='./css/employee.css') }}">
+{% endblock %}
+{% block body %}
+{{ super() }}
+<section class="section">
+    <form class="tile is-ancestor is-vertical" id="register-form">
+        <section class="tile is-parent is-12">
+            <section class="tile is-parent is-4">
+                <article class="tile is-parent is-vertical">
+                    <article class="tile is-child is-12">
+                        <h1 class="title">Información Personal</h1>
+                    </article>
+                    <article class="tile is-parent">
+                        <article class="tile is-child is-6">
+                            <div class="content field">
+                                <label class="label">Nombre(s)</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="name" 
+                                        id="name" 
+                                        class="input is-small" 
+                                        placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="content field">
+                                <label class="label">Edad</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="age" 
+                                        id="age" 
+                                        class="input is-small" 
+                                        placeholder="Edad">
+                                </div>
+                            </div>
+                            <div class="content field">
+                                <label class="label">Sexo</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="sex" 
+                                        id="sex" 
+                                        class="input is-small" 
+                                        placeholder="Sexo">
+                                </div>
+                            </div>
+                            <div class="content field">
+                                <label class="label">Clave de Elector</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="elector_key" 
+                                        id="elector_key" 
+                                        class="input is-small" 
+                                        placeholder="Clave de Elector">
+                                </div>
+                            </div>
+                        </article>
+    
+                        <article class="tile is-child is-6">
+                            <div class="content field">
+                                <label class="label">Apellido(s)</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="last_name" 
+                                        id="last_name" 
+                                        class="input is-small" 
+                                        placeholder="Apellido(s)">
+                                </div>
+                            </div>
+                            <div class="content field">
+                                <label class="label">Fecha de Nac.</label>
+                                <div class="control">
+                                    <input 
+                                        type="date" 
+                                        name="birth_date" 
+                                        id="birth_date"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                            <div class="content field">
+                                <label class="label">Curp</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="curp" 
+                                        id="curp" 
+                                        class="input is-small" 
+                                        placeholder="Curp">
+                                </div>
+                            </div>
+                            <div class="content field">
+                                <label class="label">IFE</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="ife" 
+                                        id="ife" 
+                                        class="input is-small" 
+                                        placeholder="IFE">
+                                </div>
+                            </div>
+                        </article>
+                    </article>
+                    <article class="tile is-child is-12">
+                        <div class="content field">
+                            <label class="label">Foto de Perfil</label>
+                            <div class="control">
+                                <input type="file" name="profile_pic" id="profile_pic" class="input is-medium">
+                            </div>
+                        </div>
+                    </article>
+                </article>
+            </section>
+            <section class="tile is-parent is-4">
+                <article class="tile is-parent is-vertical">
+                    <article class="tile is-child is-12">
+                        <h1 class="title">Información Empresarial</h1>
+                    </article>
+                    <article class="tile is-child">
+                        <div class="content field">
+                            <label class="label">Fecha de Entrada</label>
+                            <div class="control">
+                                <input 
+                                    type="date" 
+                                    name="entry_date" 
+                                    id="entry_date"
+                                    class="input is-small">
+                            </div>
+                        </div>
+                        <div class="content field">
+                            <div class="control is-expanded">
+                                <label class="label">Puesto</label>
+                                <div class="select is-fullwidth is-small">
+                                    <select name="position" id="position">
+                                        <option value="" disabled selected>Opciones...</option>
+                                        <option value="Cajero">Cajero</option>
+                                        <option value="Auxiliar de Mantenimiento">Auxiliar de Mantenimiento</option>
+                                        <option value="Velador">Velador</option>
+                                        <option value="Administrador">Administrador</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content field">
+                            <div class="control is-expanded">
+                                <label class="label">Ubicación</label>
+                                <div class="select is-fullwidth is-small">
+                                    <select name="branch" id="branch">
+                                        <option value="" disabled selected>Opciones...</option>
+                                        <option value="Cinepolis, Cuautla">Cinepolis, Cuautla</option>
+                                        <option value="Centro, Cuautla">Centro, Cuautla</option>
+                                        <option value="La Aurora, Oaxtepec">La Aurora, Oaxtepec</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content field">
+                            <label class="label">Días Vacacionales Asignados</label>
+                            <input type="text" name="vacation_assigned_days" id="vacation_assigned_days" class="input is-small">
+                        </div>
+                    </article>
+                </article>
+            </section>
+            <section class="tile is-parent is-4">
+                <article class="tile is-parent is-vertical">
+                    <article class="tile is-child is-12">
+                        <h1 class="title">Información Salarial</h1>
+                    </article>
+                    <article class="tile is-child is-12">
+                        <div class="content field">
+                            <label class="label">Salario por Minuto</label>
+                            <input type="text" name="minutely_salary" id="minutely_salary" class="input is-small">
+                        </div>
+                        <div class="content field">
+                            <label class="label">Salario por Hora</label>
+                            <input type="text" name="hourly_salary" id="hourly_salary" class="input is-small">
+                        </div>
+                        <div class="content field">
+                            <label class="label">Salario por Día</label>
+                            <input type="text" name="daily_salary" id="daily_salary" class="input is-small">
+                        </div>
+                        <div class="content field">
+                            <label class="label">Salario por Quincena</label>
+                            <input type="text" name="biweekly_salary" id="biweekly_salary" class="input is-small">
+                        </div>
+                        <div class="content field">
+                            <label class="label">Salario por Mes</label>
+                            <input type="text" name="monthly_salary" id="monthly_salary" class="input is-small">
+                        </div>
+                    </article>
+                </article>
+            </section>
+        </section>
+        
+        <section class="tile is-parent is-12">
+            <article class="tile is-child">
+                <div class="content field">
+                    <button 
+                        type="submit" 
+                        class="button is-primary is-large is-fullwidth"
+                        id="submit-btn">Enviar</button>
+                </div>
+            </article>
+        </section>
+    </form>
+</section>
+{% endblock %}
+{%block scripts %}
+<script src="{{ url_for('static', filename='js/do_employee_signup.js') }}"></script>
+{% endblock %}

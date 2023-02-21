@@ -1,23 +1,32 @@
 from flask_mysqldb import MySQL
 
+###
+###     Methods starting with (get) will do SELECT operations
+###     Methods starting with (set) will do INSERT operations
+###
+
 conn = MySQL()
 
 workers_field_titles_full = ["name","last_name","age","sex","birth_date","curp", "elector_key", "ife", "entry_date",
                         "position","branch","minutely_salary","hourly_salary","daily_salary",
                         "biweekly_salary","monthly_salary","vacation_assigned_days","vacation_taken_days",
-                        "vacation_remaining_days"]
-workers_field_titles_less = ["id","name","position","daily_salary","biweekly_salary","monthly_salary"]
+                        "vacation_remaining_days", "profile_pic"]
+workers_field_titles_less = ["id","name","position","daily_salary","biweekly_salary","monthly_salary", "profile_pic"]
+
+def create_cursor():
+    return conn.connection.cursor()
 
 def get_user(usr_name: str) -> dict:
-    crs = conn.connection.cursor()
+    crs = create_cursor() 
     crs.execute(f"SELECT name,password FROM TB_Auth_Users WHERE name='{usr_name}'")
     result = crs.fetchone()
     if result:
         return {"usr-name": result[0], "usr-passwrd":result[1]}
     return {} 
+
 def get_workers_resumed_data()->dict:
-    crs = conn.connection.cursor()
-    crs.execute(""" SELECT id,name, position, daily_salary, biweekly_salary, monthly_salary
+    crs = create_cursor() 
+    crs.execute(""" SELECT id,name, position, daily_salary, biweekly_salary, monthly_salary, profile_pic
                 FROM TB_Employees""")
     query_result = crs.fetchall()
     return_dict = {}
@@ -31,11 +40,11 @@ def get_workers_resumed_data()->dict:
     return return_dict
 
 def get_single_worker_data(id)->dict:
-    crs = conn.connection.cursor()
+    crs = create_cursor() 
     crs.execute(f"""SELECT name,last_name,age,sex,birth_date,curp, elector_key, ife, entry_date,
                         position,branch,minutely_salary,hourly_salary,daily_salary,
                         biweekly_salary,monthly_salary,vacation_assigned_days,vacation_taken_days,
-                        vacation_remaining_days 
+                        vacation_remaining_days, profile_pic
                 FROM TB_Employees
                 WHERE id={id}""")
     query_result = crs.fetchall()
@@ -46,11 +55,11 @@ def get_single_worker_data(id)->dict:
     return return_dict
 
 def get_workers_full_data()->dict:
-    crs = conn.connection.cursor()
+    crs = create_cursor() 
     crs.execute("""SELECT name,last_name,age,sex,birth_date,curp,entry_date,
                         position,branch,minutely_salary,hourly_salary,daily_salary,
                         biweekly_salary,monthly_salary,vacation_assigned_days,vacation_taken_days,
-                        vacation_remaining_days 
+                        vacation_remaining_days, profile_pic
                 FROM TB_Employees""")
     result = crs.fetchall()
     return_dict = {}
@@ -62,3 +71,18 @@ def get_workers_full_data()->dict:
         return_dict[f"worker_{row_count}"] = tmp_dict
         row_count+=1
     return return_dict
+
+def set_worker_data(data:list)->bool:
+    crs = create_cursor() 
+    crs.execute("""INSERT INTO TB_Employees (
+            name, last_name, age, sex, birth_date, curp, elector_key, ife, entry_date, 
+            position,branch, minutely_salary, hourly_salary, daily_salary, 
+            biweekly_salary, monthly_salary,vacation_assigned_days,  profile_pic 
+        )
+        VALUES (
+            '{}', '{}', '{}',  '{}', '{}', '{}', '{}', '{}', '{}', '{}', 
+            '{}','{}', '{}', '{}', '{}', '{}', '{}', '{}'
+        ) """.format(*data))
+    conn.connection.commit()
+    result = crs.rowcount
+    return result > 0
