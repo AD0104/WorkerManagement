@@ -1,5 +1,5 @@
 from app import create_app
-from flask import redirect, render_template, url_for
+from flask import render_template
 from flask_login import login_required
 
 from app.db_services import get_workers_resumed_data, get_single_worker_data

@@ -2,7 +2,7 @@ from flask_mysqldb import MySQL
 
 conn = MySQL()
 
-workers_field_titles_full = ["name","last_name","age","sex","birth_date","curp","entry_date",
+workers_field_titles_full = ["name","last_name","age","sex","birth_date","curp", "elector_key", "ife", "entry_date",
                         "position","branch","minutely_salary","hourly_salary","daily_salary",
                         "biweekly_salary","monthly_salary","vacation_assigned_days","vacation_taken_days",
                         "vacation_remaining_days"]
@@ -32,7 +32,7 @@ def get_workers_resumed_data()->dict:
 
 def get_single_worker_data(id)->dict:
     crs = conn.connection.cursor()
-    crs.execute(f"""SELECT name,last_name,age,sex,birth_date,curp,entry_date,
+    crs.execute(f"""SELECT name,last_name,age,sex,birth_date,curp, elector_key, ife, entry_date,
                         position,branch,minutely_salary,hourly_salary,daily_salary,
                         biweekly_salary,monthly_salary,vacation_assigned_days,vacation_taken_days,
                         vacation_remaining_days 
