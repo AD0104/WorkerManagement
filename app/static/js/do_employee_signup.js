@@ -5,11 +5,6 @@ document
 
         let base_form = document.getElementById("register-form");
         let form_data = new FormData(base_form);
-        // let json_data = {};
-        // form_data.forEach((value, key) => {
-        //     json_data[key] = value;
-        // })
-        // json_data = JSON.stringify(json_data);
         let hdrs = new Headers();
         let opts = {
             method: "POST",
@@ -42,7 +37,10 @@ document
                     text: "Todos los datos fueron correctamente ingresados",
                     confirmButtonText: "Continuar",
                     timer: 5000
-                });
+                }).then((result) => {
+                    if(result.isConfirmed)
+                        window.location.reload();
+                })
             }
         })
     });

@@ -83,23 +83,8 @@ a.navbar-link:hover {
 }
 
 /* Card (3 each row) */
-.row {
-    margin-block: 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    color: white;
-}
-
-.row p,
-.row a {
-    margin-left: 10px;
-    color: white;
-}
-
 .card {
-    width: 30%;
+    width: 90%;
     background-color: var(--background-alternate-light);
 }
 
@@ -114,27 +99,42 @@ a.navbar-link:hover {
     object-fit: cover;
 }
 
+figure.image {
+    display: flex;
+    justify-content: center;
+}
+
 .card-footer {
     padding-block: 1em;
-}
-
-.content-row {
-    width: 100%;
-    margin-block: 1em;
-    display: flex;
-    flex-direction: row;
-}
-
-.content-row--item {
-    width: 50%;
 }
 
 .button {
     background-color: var(--background-blue);
     border: none;
     transition: all 0.2s ease-in-out;
+    color: white;
 }
 
 .button:hover {
     color: var(--background-yellow);
+}
+
+.is-ancestor>.is-parent>.tile {
+    display: flex;
+    justify-content: center;
+}
+
+.is-child p {
+    color: white;
+}
+
+.content>.tile p {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .card {
+        width: 100%;
+        margin-block: 1rem;
+    }
 }

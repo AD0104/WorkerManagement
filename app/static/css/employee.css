@@ -36,6 +36,12 @@
     color: #EC9A29;
 }
 
+.title,
+.subtitle,
+.text {
+    color: white;
+}
+
 .is-child>.title {
     color: white;
     transition: all 0.2s ease-in-out;
@@ -43,4 +49,8 @@
 
 .is-child>.title:hover {
     color: #F4C27C;
+}
+
+.invisible {
+    display: none;
 }

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block head_tags %}
+<link rel="stylesheet" href="{{ url_for('static',filename='./css/employee.css') }}">
+{% endblock %}
+{% block body %}
+{{ super() }}
+<section class="section">
+    <section class="tile is-ancestor is-vertical">
+        {% for worker_id, worker_dict in workers.items() %}
+            {% if loop.index0 % 3 == 0 %}
+            <section class="tile is-parent is-parent--centered">
+            {% endif %}
+                <article class="tile is-child is-4">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-128x128">
+                                        <img src="{{ url_for('static', filename=worker_dict['profile_pic']) }}" alt="">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-4">{{worker_dict["name"]}}</p>
+                                    <p class="subtitle is-6">{{worker_dict["last_name"]}}</p>
+                                    <p class="text">{{worker_dict["position"]}}, {{worker_dict["branch"]}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <button 
+                                value="/employees/remove/{{worker_dict['id']}}"
+                                class="card-footer-item button is-link remove-btn">Remover</button>
+                        </footer>
+                    </div>
+                </article>
+            {% if loop.index0 % 3 == 2 or loop.last %}
+            </section>
+            {% endif %}
+        {% endfor %}
+    </section>
+</section>
+{% endblock %}
+{%block scripts %}
+<script src="{{ url_for('static', filename='js/do_employee_remove.js') }}"></script>
+{% endblock %}

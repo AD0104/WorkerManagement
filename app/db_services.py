@@ -11,7 +11,8 @@ workers_field_titles_full = ["name","last_name","age","sex","birth_date","curp",
                         "position","branch","minutely_salary","hourly_salary","daily_salary",
                         "biweekly_salary","monthly_salary","vacation_assigned_days","vacation_taken_days",
                         "vacation_remaining_days", "profile_pic"]
-workers_field_titles_less = ["id","name","position","daily_salary","biweekly_salary","monthly_salary", "profile_pic"]
+workers_field_titles_less = ["id","name","last_name","position","daily_salary","biweekly_salary","monthly_salary", "profile_pic"]
+workers_field_titles_short = ["id", "name", "last_name", "position", "branch", "profile_pic"]
 
 def create_cursor():
     return conn.connection.cursor()
@@ -26,7 +27,7 @@ def get_user(usr_name: str) -> dict:
 
 def get_workers_resumed_data()->dict:
     crs = create_cursor() 
-    crs.execute(""" SELECT id,name, position, daily_salary, biweekly_salary, monthly_salary, profile_pic
+    crs.execute(""" SELECT id,name, last_name, position, daily_salary, biweekly_salary, monthly_salary, profile_pic
                 FROM TB_Employees""")
     query_result = crs.fetchall()
     return_dict = {}
@@ -37,6 +38,19 @@ def get_workers_resumed_data()->dict:
             tmp_dict[key] = value
         return_dict[f"worker_{row_count}"] = tmp_dict
         row_count+=1
+    return return_dict
+
+def get_workers_short_data()->dict:
+    crs = create_cursor()
+    crs.execute("""SELECT id,name,last_name,position,branch,profile_pic FROM TB_Employees""")
+    query_result = crs.fetchall()
+    return_dict = {}
+    for row in query_result:
+        tmp = {}
+        worker_id = row[0]
+        for key, value in zip(workers_field_titles_short, row):
+            tmp[key] = value
+        return_dict["worker_"+str(worker_id)] = tmp
     return return_dict
 
 def get_single_worker_data(id)->dict:
@@ -83,6 +97,14 @@ def set_worker_data(data:list)->bool:
             '{}', '{}', '{}',  '{}', '{}', '{}', '{}', '{}', '{}', '{}', 
             '{}','{}', '{}', '{}', '{}', '{}', '{}', '{}'
         ) """.format(*data))
+    conn.connection.commit()
+    result = crs.rowcount
+    return result > 0
+
+def del_worker_data(id)->bool:
+    crs = create_cursor()
+    crs.execute(f"DELETE FROM TB_Employees WHERE id={id}")
+
     conn.connection.commit()
     result = crs.rowcount
     return result > 0

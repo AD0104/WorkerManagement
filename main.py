@@ -4,7 +4,8 @@ from flask_login import login_required
 from werkzeug.utils import secure_filename
 from os import path
 
-from app.db_services import get_workers_resumed_data, get_single_worker_data, set_worker_data
+from app.db_services import get_workers_resumed_data, get_single_worker_data, \
+    get_workers_short_data, set_worker_data, get_workers_short_data, del_worker_data
 from app.image_services import do_resize_image
 
 app = create_app()
@@ -85,3 +86,17 @@ def employee_add():
                                       Intentalo más tarde""","400")
         return make_json_response("Done post", "200")
     return render_template("employees/add_data.html")
+
+@app.route("/employees/remove")
+@login_required
+def employee_remove():
+    context = {
+        "workers": get_workers_short_data()
+        }
+    return render_template("employees/delete_data.html", **context)
+
+@app.route("/employees/remove/<int:id>", methods=["DELETE"])
+def employees_do_remove(id):
+    if del_worker_data(id):
+        return make_json_response("Ok", "200")
+    return make_json_response("Ocurrió un error al eliminar, intentalo de nuevo más tarde","400")
