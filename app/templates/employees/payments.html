@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block head_tags %}
+<link rel="stylesheet" href="{{ url_for('static',filename='./css/employee.css') }}">
+{% endblock %}
+{% block body %}
+{{ super() }}
+<section class="section">
+    <section class="tile is-ancestor is-vertical">
+        <section class="tile is-parent">
+            <section class="tile is-parent">
+                <article class="tile is-child">
+                    <h1 class="title">Periodo</h1>
+                    <div class="content">
+                        <form class="form" id="periodo-form">
+                            <div class="field">
+                                <label class="label">Periodo laborado</label>
+                                <div class="control">
+                                    <input 
+                                        type="text"
+                                        name="worked_period"
+                                        id="worked_period"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </article>
+            </section>
+        </section>
+        <section class="tile is-parent">
+            <section class="tile is-parent">
+                <article class="tile is-child">
+                    <h1 class="title">Percepciones</h1>
+                    <div class="content">
+                        <form class="form" id="percepciones-form">
+                            <div class="field">
+                                <label class="label">Días laborados en este periodo</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="worked_days" 
+                                        id="worked_days"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Minutos extras en este periodo</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="extra_minutes" 
+                                        id="extra_minutes"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                        </form>
+                        <button 
+                            type="submit"
+                            class="button is-link" 
+                            id="percepciones-btn">Agregar otro concepto</button>
+                    </div>
+                </article>
+                <article class="tile is-child">
+                    <h1 class="title">Salario</h1>
+                    <div class="content">
+                        <p>Por Minuto: <span id="minutely_salary">{{ worker_info["minutely_salary"] }}</span></p>
+                        <p>Por Hora: <span id="hourly_salary">{{ worker_info["hourly_salary"] }}</span></p>
+                        <p>Por Día: <span id="daily_salary">{{ worker_info["daily_salary"] }}</span></p>
+                        <p>Por Quincena: <span id="biweekly_salary">{{ worker_info["biweekly_salary"] }}</span></p>
+                        <p>Por Mes: <span id="monthly_salary">{{ worker_info["monthly_salary"] }}</span></p>
+                    </div>
+                </article>
+            </section>
+        </section>
+        <section class="tile is-parent">
+            <section class="tile is-parent">
+                <article class="tile is-child">
+                    <h1 class="title">Deducciones</h1>
+                    <div class="content">
+                        <form class="form" id="deducciones-form">
+                            <div class="field">
+                                <label class="label">Minutos de retardo en el periodo</label>
+                                <div class="control">
+                                    <input 
+                                        type="text" 
+                                        name="minutes_late" 
+                                        id="minutes_late"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                        </form>
+                        <button 
+                            class="button is-link" 
+                            id="deducciones-btn">Agregar otro concepto</button>
+                    </div>
+                </article>
+                <article class="tile is-child">
+                    <h1 class="title">Totales</h1>
+                    <div class="content">
+                        <form class="form" id="totales-form">
+                            <div class="field">
+                                <label class="label">Total de Percepciones</label>
+                                <div class="control">
+                                    <input 
+                                        type="text"
+                                        name="percepciones_total"
+                                        id="percepciones_total"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Total de Deducciones</label>
+                                <div class="control">
+                                    <input 
+                                        type="text"
+                                        name="deducciones_total"
+                                        id="deducciones_total"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Total General</label>
+                                <div class="control">
+                                    <input 
+                                        type="text"
+                                        name="general_total"
+                                        id="general_total"
+                                        class="input is-small">
+                                </div>
+                            </div>
+                        </form>
+                        <button 
+                            class="button is-link" 
+                            id="totales-btn">Recalcular totales</button>
+                    </div>
+                </article>
+            </section>
+        </section>
+        <section class="tile is-parent">
+            <section class="tile is-parent">
+                <article class="tile is-child">
+                    <h1 class="title">Documentación</h1>
+                    <div class="content">
+                        <button class="button is-primary is-large" id="gendoc-btn">Generar documento</button>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </section>
+</section>
+{% endblock %}
+{%block scripts %}
+<script src="{{ url_for('static', filename='js/do_employee_payment.js') }}"></script>
+{% endblock %}

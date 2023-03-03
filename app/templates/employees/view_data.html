@@ -24,7 +24,7 @@
                             <p>Sexo: <span>{{worker_info["sex"]}}</span></p>
                             <p>CURP: <span>{{worker_info["curp"]}}</span></p>
                             <p>Clave Elector: <span>{{worker_info["elector_key"]}}</span></p>
-                            <p>IFE: <span>{{worker_info["ife"]}}</span></p>
+                            <p>INE: <span>{{worker_info["ine"]}}</span></p>
                         </div>
                     </article>
                 </section>
@@ -71,7 +71,7 @@
                     <article class="tile is-child">
                         <p class="title">Opciones</p>
                         <div class="content">
-                            <a href="#" class="button is-link is-rounded">Calcular Pago</a>
+                            <a href="/menu/employee/{{worker_info['id']}}/payment" class="button is-link is-rounded">Calcular Pago</a>
                             <a href="#" class="button is-link is-rounded">Modificar Datos</a>
                         </div>
                     </article>

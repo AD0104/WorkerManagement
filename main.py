@@ -50,6 +50,16 @@ def single_employee_info(id):
         "worker_info": get_single_worker_data(id)
     }
     return render_template("employees/view_data.html", **context)
+
+@app.route("/menu/employee/<int:id>/payment", methods=["GET","POST"])
+@login_required
+def single_employee_payment(id):
+    if request.method == "POST":
+        return make_json_response("Ok", "200")
+    context = {
+        "worker_info": get_single_worker_data(id)
+    }
+    return render_template("employees/payments.html", **context)
     
 @app.route("/employees/add", methods=["GET","POST"])
 @login_required

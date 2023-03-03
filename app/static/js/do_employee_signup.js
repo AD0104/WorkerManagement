@@ -8,10 +8,10 @@ document
         let hdrs = new Headers();
         let opts = {
             method: "POST",
-			headers: hdrs,
-			mode: "cors",
-			cache: "default",
-			body: form_data,
+            headers: hdrs,
+            mode: "cors",
+            cache: "default",
+            body: form_data,
         };
         let url = "/employees/add"
 
@@ -23,7 +23,7 @@ document
                 Swal.showLoading();
             }
         }).then(() => {
-            if(response.status != "200"){
+            if (response.status != "200") {
                 Swal.fire({
                     icon: "error",
                     title: "Algo salió mal",
@@ -38,12 +38,12 @@ document
                     confirmButtonText: "Continuar",
                     timer: 5000
                 }).then((result) => {
-                    if(result.isConfirmed)
+                    if (result.isConfirmed)
                         window.location.reload();
                 })
             }
         })
     });
-async function do_fetch(url, opts){
+async function do_fetch(url, opts) {
     return (await fetch(url, opts)).json();
 }

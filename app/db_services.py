@@ -7,7 +7,7 @@ from flask_mysqldb import MySQL
 
 conn = MySQL()
 
-workers_field_titles_full = ["name","last_name","age","sex","birth_date","curp", "elector_key", "ife", "entry_date",
+workers_field_titles_full = ["id","name","last_name","age","sex","birth_date","curp", "elector_key", "ine", "entry_date",
                         "position","branch","minutely_salary","hourly_salary","daily_salary",
                         "biweekly_salary","monthly_salary","vacation_assigned_days","vacation_taken_days",
                         "vacation_remaining_days", "profile_pic"]
@@ -55,7 +55,7 @@ def get_workers_short_data()->dict:
 
 def get_single_worker_data(id)->dict:
     crs = create_cursor() 
-    crs.execute(f"""SELECT name,last_name,age,sex,birth_date,curp, elector_key, ife, entry_date,
+    crs.execute(f"""SELECT id,name,last_name,age,sex,birth_date,curp, elector_key, ine, entry_date,
                         position,branch,minutely_salary,hourly_salary,daily_salary,
                         biweekly_salary,monthly_salary,vacation_assigned_days,vacation_taken_days,
                         vacation_remaining_days, profile_pic
@@ -89,7 +89,7 @@ def get_workers_full_data()->dict:
 def set_worker_data(data:list)->bool:
     crs = create_cursor() 
     crs.execute("""INSERT INTO TB_Employees (
-            name, last_name, age, sex, birth_date, curp, elector_key, ife, entry_date, 
+            name, last_name, age, sex, birth_date, curp, elector_key, ine, entry_date, 
             position,branch, minutely_salary, hourly_salary, daily_salary, 
             biweekly_salary, monthly_salary,vacation_assigned_days,  profile_pic 
         )
