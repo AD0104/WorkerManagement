@@ -18,7 +18,6 @@ def create_app():
     app.config.from_object(Config)
 
     login_mng.init_app(app)
-    conn.init_app(app)
 
     app.register_blueprint(auth)
 

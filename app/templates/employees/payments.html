@@ -63,11 +63,11 @@
                 <article class="tile is-child">
                     <h1 class="title">Salario</h1>
                     <div class="content">
-                        <p>Por Minuto: <span id="minutely_salary">{{ worker_info["minutely_salary"] }}</span></p>
-                        <p>Por Hora: <span id="hourly_salary">{{ worker_info["hourly_salary"] }}</span></p>
-                        <p>Por Día: <span id="daily_salary">{{ worker_info["daily_salary"] }}</span></p>
-                        <p>Por Quincena: <span id="biweekly_salary">{{ worker_info["biweekly_salary"] }}</span></p>
-                        <p>Por Mes: <span id="monthly_salary">{{ worker_info["monthly_salary"] }}</span></p>
+                        <p>Por Minuto: <span class="wage-info" id="minutely_salary">{{ worker_info["minutely_salary"] }}</span></p>
+                        <p>Por Hora: <span class="wage-info" id="hourly_salary">{{ worker_info["hourly_salary"] }}</span></p>
+                        <p>Por Día: <span class="wage-info" id="daily_salary">{{ worker_info["daily_salary"] }}</span></p>
+                        <p>Por Quincena: <span class="wage-info" id="biweekly_salary">{{ worker_info["biweekly_salary"] }}</span></p>
+                        <p>Por Mes: <span class="wage-info" id="monthly_salary">{{ worker_info["monthly_salary"] }}</span></p>
                     </div>
                 </article>
             </section>
@@ -141,7 +141,7 @@
                 <article class="tile is-child">
                     <h1 class="title">Documentación</h1>
                     <div class="content">
-                        <button class="button is-primary is-large" id="gendoc-btn">Generar documento</button>
+                        <button class="button is-primary is-large" id="gendoc-btn" >Generar documento</button>
                     </div>
                 </article>
             </section>
@@ -151,4 +151,5 @@
 {% endblock %}
 {%block scripts %}
 <script src="{{ url_for('static', filename='js/do_employee_payment.js') }}"></script>
+<script src="{{ url_for('static', filename='js/do_employee_payment_file_retrieve.js') }}"></script>
 {% endblock %}

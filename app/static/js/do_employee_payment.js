@@ -18,6 +18,7 @@ let deducciones_options = {
 }
 
 let fixed_decimals = 2,
+    exists_empty_input = false,
     wages = {};
 
 // --* START OF PERCEPCIONES RELATED FUNCTIONS *--
@@ -157,7 +158,14 @@ document
         let deducciones_total = parseFloat(get_deducciones_sum());
         let general_total = do_sum(percepciones_total, -deducciones_total);
 
+        if (exists_empty_input) {
+            exists_empty_input = false;
+            return;
+        }
+
         do_refresh_totals(percepciones_total, deducciones_total, general_total);
+        document.getElementById("gendoc-btn").disabled = false;
+
     });
 
 function do_refresh_totals(percepciones, deducciones, general) {
@@ -198,23 +206,6 @@ document
         }
     });
 
-document
-    .getElementById("gendoc-btn")
-    .addEventListener("click", async (event) => {
-        event.preventDefault();
-
-        let hdrs = new Headers({ "Content-Type": "application/json" });
-        let request_body = do_construct_body();
-        let init = {
-            method: "POST",
-            headers: hdrs,
-            mode: "cors",
-            cache: "default",
-            body: request_body
-        }
-
-
-    })
 // --* END OF DOM MANIPULATION *--
 
 // --* START OF CALCULATIONS *--
@@ -223,7 +214,7 @@ function get_percepciones_sum() {
     let wages_inputs = document.querySelectorAll("#percepciones-form input");
 
     if (do_check_empty_field(Array.from(wages_inputs), "Percepciones"))
-        return
+        return;
 
     let wages_array = [], wages_total = 0;
     for (let wage_current of wages_inputs) {
@@ -268,7 +259,7 @@ function get_deducciones_sum() {
     let deductions_inputs = document.querySelectorAll("#deducciones-form input");
 
     if (do_check_empty_field(Array.from(deductions_inputs), "Deducciones"))
-        return
+        return;
 
     let deductions_values = []
     for (let deductions_current of deductions_inputs) {
@@ -328,18 +319,10 @@ function do_check_empty_field(fields, section_name) {
                 text: `Detectamos un campo vacio en ${section_name}!`,
             })
             is_empty = true;
+            exists_empty_input = true;
         }
     });
     return is_empty;
-}
-
-function do_construct_body() {
-    let page_inputs = document.querySelectorAll("input.input");
-    let body = {};
-    for (let input of page_inputs) {
-        body[input.id] = input.value
-    }
-    return JSON.stringify(body);
 }
 
 async function do_fetch(url, opts) {

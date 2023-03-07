@@ -1,14 +1,24 @@
+from sys import prefix
 from app import create_app
 from flask import render_template, request, jsonify, make_response
 from flask_login import login_required
 from werkzeug.utils import secure_filename
-from os import path
+from os import path, getenv
 
 from app.db_services import get_workers_resumed_data, get_single_worker_data, \
     get_workers_short_data, set_worker_data, get_workers_short_data, del_worker_data
 from app.image_services import do_resize_image
+from app.form_services import form_fill_file, form_new_filename, form_new_file
+from shutil import copy2
+
+from dotenv import load_dotenv
+load_dotenv()
 
 app = create_app()
+app.config.update(
+    SECRET_KEY=getenv("SECRET_KEY"),
+    SALT=getenv("SALT"),
+)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -23,13 +33,14 @@ def is_allowed_filename(filename)->bool:
             filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
 
 def generate_insert_data(form_dict):
-    keys = ["name", "last_name", "age", "sex", "birth_date", "curp", "elector_key", "ife", "entry_date", "position",
+    keys = ["name", "last_name", "age", "sex", "birth_date", "curp", "elector_key", "ine", "entry_date", "position",
         "branch", "minutely_salary", "hourly_salary", "daily_salary", "biweekly_salary", "monthly_salary",
         "vacation_assigned_days"]
     data = []
     for key in keys:
         data.append(form_dict[key])
     return [form_dict[key] for key in keys] 
+
 
 @app.route("/")
 def index():
@@ -54,10 +65,25 @@ def single_employee_info(id):
 @app.route("/menu/employee/<int:id>/payment", methods=["GET","POST"])
 @login_required
 def single_employee_payment(id):
+    worker_info = get_single_worker_data(id)
     if request.method == "POST":
+        request_json = request.get_json() or {}
+        if not request_json:
+            return make_json_response("Error JSON vacio", "400")
+        # for value in request_json.values():
+        #     if value == "":
+        #         return make_json_response("Error, existen campos vacios", "400")
+
+        #Create file name and copy base pdf form
+        filename = form_new_filename([worker_info['name'], worker_info['last_name']])
+        file_path, result = form_new_file(filename) 
+        if(result):
+            form_fill_file({**worker_info, **request_json}, file_path)
+
+        
         return make_json_response("Ok", "200")
     context = {
-        "worker_info": get_single_worker_data(id)
+        "worker_info": worker_info 
     }
     return render_template("employees/payments.html", **context)
     
